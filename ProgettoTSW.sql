@@ -3,7 +3,7 @@ CREATE DATABASE  ProgettoTSW;
 use ProgettoTSW;
 
 Create table Produttore(
-id int auto_increment Primary Key,
+pIva varchar(10) Primary Key,
 nome varchar(20) not null,
 via varchar(20) not null, 
 cap int not null,
@@ -49,8 +49,8 @@ id int auto_increment Primary key,
 
 Create table Prodotto(
 id int auto_increment Primary Key,
-produttore int,
-foreign key (produttore) references Produttore(id) 
+produttore varchar(10),
+foreign key (produttore) references Produttore(pIva) 
 on delete cascade 
 on update cascade,
 categoria int,
@@ -59,8 +59,8 @@ on delete cascade
 on update cascade,
 nome varchar(20) not null,
 descrizione varchar(200) not null,
-offerta boolean not null default 0,
 prezzo double not null,
+offerta boolean not null default 0,
 disponibili int not null,
 immagine varchar(100) not null
 );
