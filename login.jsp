@@ -12,6 +12,7 @@
             <label for="pwd">Password:</label><br>
             <input type="password" id="pwd" name="pwd"><br><br>
             <input type="submit" value="Accedi">
+            <input type="submit" name="Registrati" value="Registrati">
         </form>
 
     </body>
