@@ -24,38 +24,47 @@ public class LoginServlet extends HttpServlet
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        //Prendo i parametri che abbiamo inserito nella request.
-        String username=request.getParameter("username");
-        String pass=request.getParameter("pwd");
-
-
-        UtenteDAO utente=new UtenteDAO();
-        Utente u=utente.doRetrieveByUsernamePassword(username,pass);//verifico se ci sono nel db
-
-        if(u!=null) {
-            //se utenticazione andata a buon fine vado a recuperare la sessione vecchia nel caso dovesse esserci e la invalido
-            HttpSession oldSession = request.getSession(false);//false perchè se non c'è NON la crea
-            if (oldSession != null) {//c'è la sessione
-                oldSession.invalidate();//la invalido,questo lo faccio perche nel caso il cliente si è stato 10 minuti inattivo
-                //e vuole altro tempo ,cosi gli diamo altro tempo
-            }
-            HttpSession currentSession = request.getSession();
-            currentSession.setAttribute("user", username);
-            currentSession.setMaxInactiveInterval(10*60);//va a secnodi dopo 10 minuti sei fuori devi riautenticarti per altro tempo
-                                                            //per questo motivo prima vado ad eliminare la sessione vecchia
-
-            String address = "success.jsp";
+        if(request.getParameter("Registrati")!=null)//se ho cliccato il bottone registrati
+        {
+            String address = "registrazione.jsp";
             RequestDispatcher rd = request.getRequestDispatcher(address);
             rd.forward(request, response);
+        } else {
 
-        }else{
-            //autenticazione fallisce
+            //Prendo i parametri che abbiamo inserito nella request.
+            String username = request.getParameter("username");
+            String pass = request.getParameter("pwd");
 
 
-           response.sendRedirect("login.jsp");
+            UtenteDAO utente = new UtenteDAO();
+            Utente u = utente.doRetrieveByUsernamePassword(username, pass);//verifico se ci sono
+
+            //al momento provo con i valori che ho inserito
+            if (u != null) {
+                //se utenticazione andata a buon fine vado a recuperare la sessione vecchia nel caso dovesse esserci e la invalido
+                HttpSession oldSession = request.getSession(false);//false perchè se non c'è NON la crea
+                if (oldSession != null) {//c'è la sessione
+                    oldSession.invalidate();//la invalido,questo lo faccio perche nel caso il cliente si è stato 10 minuti inattivo
+                    //e vuole altro tempo ,cosi gli diamo altro tempo
+                }
+                HttpSession currentSession = request.getSession();
+                currentSession.setAttribute("user", username);
+                currentSession.setMaxInactiveInterval(10 * 60);//va a secnodi dopo 10 minuti sei fuori devi riautenticarti per altro tempo
+                //per questo motivo prima vado ad eliminare la sessione vecchia
+
+                String address = "success.jsp";
+                RequestDispatcher rd = request.getRequestDispatcher(address);
+                rd.forward(request, response);
+
+            } else {
+                //autenticazione fallisce
 
 
+                response.sendRedirect("login.jsp");
+
+
+            }
         }
-
     }
 }
+
