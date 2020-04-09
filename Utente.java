@@ -1,10 +1,9 @@
+
 package model;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-//questo utente l'ho preso dal progetto precedente
 
 public class Utente
 {
@@ -14,23 +13,27 @@ public class Utente
     private String email;
     private boolean admin;
     private  String passwordhash;
+    private String citta;
+    // la data ci manca 
     public Utente() {
 
     }
-    public Utente(int id, String username, String password, String email, boolean admin)
+    public Utente(int id, String username, String password, String email,String citta,boolean admin)
     {
         this.id=id;
         this.username=username;
         this.passwordhash=password;
         this.email=email;
+        this.citta=citta;
         this.admin=admin;
     }
-    public Utente(String username, String password, String email, boolean admin)
+    public Utente(String username, String password, String email,String citta, boolean admin)
     {
         this.id=last++;
         this.username=username;
         this.passwordhash=password;
         this.email=email;
+        this.citta=citta;
         this.admin=admin;
     }
 
@@ -44,6 +47,9 @@ public class Utente
     public void setUsername(String username){this.username=username;}
     public void setEmail(String email){this.email=email;}
     public void setAdmin(boolean admin){this.admin=admin;}
+
+    public String getCitta() { return citta; }
+    public void setCitta(String citta) { this.citta = citta; }
 
     public void setPassword(String password){
         try {
