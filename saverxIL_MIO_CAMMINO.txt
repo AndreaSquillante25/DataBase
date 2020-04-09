@@ -1,0 +1,14 @@
+Giorno 09/04/2020
+La pagina di login,"login.jsp" presenta i campi di login e password e due bottoni ,"accedi"e "registrati", richiama 
+utilizzando il metodo post per non far vedere i parametri la "LoginServlet.java" che fa subito un controllo per vedere se l'utenet ha cliccato 
+registrati e quindi rimanda alla relativa jsp ,"registrazione.jsp" attraverso una forward,nel caso in cui l'utente ha cliccato accedi 
+controlliamo se i dati sono corretti ,in caso contrario inviamo una risposta attraverso "sendredirect" che reindirizza 
+l'utente alla pagina di login.Nel caso in cui i dati sono corretti possiamo trovarci in 2 casi.Caso 1)L'utente si trovava gia sul sito
+però è rimasto inattivo per più di 10 minuti , cosi avendo fissato un tempo di inattivita di massimo 10 minuti lo abbiamo cacciato fuori
+quindi dopo essersi riautenticato abbiamo eliminiato la sessione vecchia e 2)creiamo una sessione nuova dove settiamo gli attributi 
+del nomeutente e lo reindirizziamo (al momento) ad una jsp chiamata "success.jsp".
+
+Nella jsp "registrazione.jsp" prendiamo : Username, password, data di nascita,citta(dobbiamo vedere come aggiustarla),
+La relativa Servlet "RegistrazioneServlet.java" prende tutti i campi ma la "datadinascita" per il momento non la registriamo dobbiamo vedere
+per la verifica della maggior eta.
+
